@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -6,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 8f;
     public Collider playerCollider;
     public MeshRenderer playermeshrederer;
+    public int Hp = 3;
+    public GameObject[] Hpicon;
     private void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -23,26 +27,24 @@ public class PlayerController : MonoBehaviour
         Vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed);
 
         playerRigidbody.linearVelocity = newVelocity;
-        /*addforce
-         if (Input.GetKey(KeyCode.W)== true)
-         {
-             playerRigidbody.AddForce(0f, 0f, speed);
-         }
-
-         if (Input.GetKey(KeyCode.S) == true)
-         {
-             playerRigidbody.AddForce(0f, 0f, -speed);
-         }
-
-         if (Input.GetKey(KeyCode.A) == true)
-         {
-             playerRigidbody.AddForce(-speed, 0f, 0f);
-         }
-
-         if (Input.GetKey(KeyCode.D) == true)
-         {
-             playerRigidbody.AddForce(speed, 0f, 0f);
-         }*/
-
+        
+        if (Hp == 2)
+        {
+            Hpicon[2].SetActive(false);
+        }
+        else if (Hp == 1)
+        {
+            Hpicon[1].SetActive(false);
+        }
+        if (Hp == 0)
+        {
+            Hpicon[0].SetActive(false);
+        }
+    }
+    
+    public void Die()
+    {
+        GameManager gameManager = FindAnyObjectByType<GameManager>();
+        gameManager.EndGame();
     }
 }

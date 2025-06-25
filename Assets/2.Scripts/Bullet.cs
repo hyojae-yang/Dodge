@@ -10,32 +10,29 @@ public class Bullet : MonoBehaviour
     {
         bulletRigdbody = GetComponent<Rigidbody>();
         bulletRigdbody.linearVelocity = transform.forward * speed;
-        Destroy(gameObject, 5f);
     }
 
-    /*Color originColor;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+       if(other.tag == "Player")
         {
-            originColor = other.gameObject.GetComponent<MeshRenderer>().material.color;
+            PlayerController playerController = other.GetComponent<PlayerController>();
+            playerController.Hp--;
+            if (playerController != null)
+            {
+                if (playerController.Hp <= 0)
+                {
+                    playerController.Hp = 0;
+                    playerController.Die();
+                }
+                
+            }
+            Destroy(gameObject);
+        }
+        if (other.tag == "wall")
+        {
+            Destroy(gameObject);
         }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            float r = UnityEngine.Random.Range(0f, 1f);
-            float g = UnityEngine.Random.Range(0f, 1f);
-            float b = UnityEngine.Random.Range(0f, 1f);
-            other.gameObject.GetComponent<MeshRenderer>().material.color = new Color(r, g, b);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            other.gameObject.GetComponent<MeshRenderer>().material.color = originColor;
-        }
-    }*/
+
 }
