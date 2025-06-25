@@ -4,7 +4,7 @@ public class BulletSpawner : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float spawnRatemin = 0.5f;
-    public float spawnRatemax = 3f;
+    public float spawnRatemax = 2f;
     private float spawnRate;
     private float timeAfterSpawn;
     Transform target;

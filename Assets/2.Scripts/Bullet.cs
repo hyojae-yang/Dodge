@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 8f;
     Rigidbody bulletRigdbody;
 
     private void Start()
@@ -17,9 +17,9 @@ public class Bullet : MonoBehaviour
        if(other.tag == "Player")
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
-            playerController.Hp--;
             if (playerController != null)
             {
+                playerController.Hp--;
                 if (playerController.Hp <= 0)
                 {
                     playerController.Hp = 0;
