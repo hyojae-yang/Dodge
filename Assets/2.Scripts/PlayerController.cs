@@ -27,24 +27,17 @@ public class PlayerController : MonoBehaviour
         Vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed);
 
         playerRigidbody.linearVelocity = newVelocity;
-        
-        if (Hp == 2)
-        {
-            Hpicon[2].SetActive(false);
-        }
-        else if (Hp == 1)
-        {
-            Hpicon[1].SetActive(false);
-        }
-        if (Hp == 0)
-        {
-            Hpicon[0].SetActive(false);
-        }
     }
     
     public void Die()
     {
         GameManager gameManager = FindAnyObjectByType<GameManager>();
-        gameManager.EndGame();
+        Hp--;
+        gameManager.HealthUpdate(Hp);
+        if (Hp == 0)
+        {
+            gameManager.EndGame();
+            gameObject.SetActive(false);
+        }
     }
 }

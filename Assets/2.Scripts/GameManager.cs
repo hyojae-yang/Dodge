@@ -7,13 +7,12 @@ public class GameManager : MonoBehaviour
     public GameObject gameoverText;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI recordText;
-
+    public GameObject[] Hpicon;
     float surviveTime = 0f;
-    bool isGameOver;
+    public bool isGameOver;
 
     private void Start()
     {
-        Time.timeScale = 1f;
         isGameOver = false;
         surviveTime = 0f;
     }
@@ -33,7 +32,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-   
     public void EndGame()
     {
         isGameOver = true;
@@ -46,6 +44,19 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("BestTime", BestTime);
         }
         recordText.text = "최고 기록: " + (int)BestTime;
-        Time.timeScale = 0f;
+        Bullet[] bullets = FindObjectsOfType<Bullet>();
+        foreach (Bullet bullet in bullets)
+        {
+            Destroy(bullet.gameObject);
+        }
+    }
+
+    public void HealthUpdate(int hp)
+    {
+        
+        for (int i = 0; i < Hpicon.Length; i++)
+        {
+            Hpicon[i].SetActive(i<hp);
+        }
     }
 }

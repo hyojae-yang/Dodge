@@ -8,26 +8,32 @@ public class BulletSpawner : MonoBehaviour
     private float spawnRate;
     private float timeAfterSpawn;
     Transform target;
+    GameManager gameManager;
 
     private void Start()
     {
         timeAfterSpawn = 0f;
         spawnRate = Random.Range(spawnRatemin, spawnRatemax);
         target = FindFirstObjectByType<PlayerController>().transform;
+        gameManager = FindFirstObjectByType<GameManager>();
     }
 
     private void Update()
     {
-        timeAfterSpawn += Time.deltaTime;
-
-        if (timeAfterSpawn >= spawnRate)
+        if (!gameManager.isGameOver)
         {
-            timeAfterSpawn = 0f;
-            spawnRate = Random.Range(spawnRatemin, spawnRatemax);
-            
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            bullet.transform.LookAt(target);
+            timeAfterSpawn += Time.deltaTime;
+
+            if (timeAfterSpawn >= spawnRate)
+            {
+                timeAfterSpawn = 0f;
+                spawnRate = Random.Range(spawnRatemin, spawnRatemax);
+
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                bullet.transform.LookAt(target);
+            }
         }
+        
         
     }
     
