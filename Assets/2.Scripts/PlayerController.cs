@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,9 +30,13 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.linearVelocity = newVelocity;
     }
     
-    public void Die()
+    public void Die(GameObject bulletTag)
     {
         GameManager gameManager = FindAnyObjectByType<GameManager>();
+        if (bulletTag.gameObject.tag == "Dibuff")
+        {
+            StartCoroutine(DibuffSlow());
+        }
         Hp--;
         gameManager.HealthUpdate(Hp);
         if (Hp == 0)
@@ -39,5 +44,12 @@ public class PlayerController : MonoBehaviour
             gameManager.EndGame();
             gameObject.SetActive(false);
         }
+    }
+    IEnumerator DibuffSlow()
+    {
+        float originSpeed = speed;
+        speed /= 2;
+        yield return new WaitForSeconds(3f);
+        speed = originSpeed;
     }
 }

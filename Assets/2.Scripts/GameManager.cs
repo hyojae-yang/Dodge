@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] Hpicon;
     float surviveTime = 0f;
     public bool isGameOver;
-
+    public static int level = 0;
     private void Start()
     {
         isGameOver = false;

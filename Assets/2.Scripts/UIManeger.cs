@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class UIManeger : MonoBehaviour
 {
+    public void LevelSelect(int level)
+    {
+        GameManager.level = level;
+    }
     public void GameStart(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
