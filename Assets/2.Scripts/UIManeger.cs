@@ -24,6 +24,12 @@ public class UIManeger : MonoBehaviour
 
     public void ClosePanel(GameObject panel)
     {
-        panel?.SetActive(false);
+        panel.SetActive(false);
+    }
+
+    public void SelectPlayer(int PlayerId)
+    { 
+        GameManager.characterId = PlayerId;
+
     }
 }

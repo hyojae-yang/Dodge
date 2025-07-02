@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Collider playerCollider;
     public MeshRenderer playermeshrederer;
     public int Hp = 3;
-    public GameObject[] Hpicon;
+    private bool isInvincible = false;
     private void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -32,10 +32,15 @@ public class PlayerController : MonoBehaviour
     
     public void Die(GameObject bulletTag)
     {
+        if (isInvincible)
+        {
+            return;
+        }
         GameManager gameManager = FindAnyObjectByType<GameManager>();
         if (bulletTag.gameObject.tag == "Dibuff")
         {
             StartCoroutine(DibuffSlow());
+            return;
         }
         Hp--;
         gameManager.HealthUpdate(Hp);
@@ -52,4 +57,22 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         speed = originSpeed;
     }
+    public void BuffHp()
+    {
+        if (Hp < 6)
+        { Hp++; }
+        GameManager gameManager = FindAnyObjectByType<GameManager>();
+        gameManager.HealthUpdate(Hp);
+    }
+    public void BuffSpeed(int speedpoint)
+    {
+        speed += speedpoint;
+    }
+    public void BuffisInvincible()
+    {
+        isInvincible = true;
+        Invoke("UnBuffisInvincible", 3f);
+    }
+    public void UnBuffisInvincible()
+        { isInvincible = false; }
 }

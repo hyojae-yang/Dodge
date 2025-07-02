@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     float surviveTime = 0f;
     public bool isGameOver;
     public static int level = 0;
+    public static int characterId = 0;
     private void Start()
     {
         isGameOver = false;
