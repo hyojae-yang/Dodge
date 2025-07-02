@@ -70,9 +70,21 @@ public class PlayerController : MonoBehaviour
     }
     public void BuffisInvincible()
     {
+        Transform buffEffect = transform.Find("Invincuble");
+        if (buffEffect != null)
+        {
+            buffEffect.gameObject.SetActive(true);
+        }
         isInvincible = true;
         Invoke("UnBuffisInvincible", 3f);
     }
     public void UnBuffisInvincible()
-        { isInvincible = false; }
+    {
+        Transform buffEffect = transform.Find("Invincuble");
+        if (buffEffect != null)
+        {
+            buffEffect.gameObject.SetActive(false);
+        }
+        isInvincible = false; 
+    }
 }

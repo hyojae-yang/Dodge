@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("BestTime", BestTime);
         }
         recordText.text = "최고 기록: " + (int)BestTime;
-        Bullet[] bullets = FindObjectsOfType<Bullet>();
+        Bullet[] bullets = FindObjectsByType<Bullet>(FindObjectsSortMode.None);
         foreach (Bullet bullet in bullets)
         {
             Destroy(bullet.gameObject);
