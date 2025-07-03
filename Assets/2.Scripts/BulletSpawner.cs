@@ -40,6 +40,6 @@ public class BulletSpawner : MonoBehaviour
     }
     void LevelArtBullet(GameObject levelBullet,int level)
     {
-        levelBullet.GetComponent<Bullet>().speed += level * 4;
+        levelBullet.GetComponent<Bullet>().speed += level * 8;
     }
 }
