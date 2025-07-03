@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody playerRigidbody;
+    private Animator playerAnimator;
     public float speed = 8f;
     public Collider playerCollider;
     public MeshRenderer playermeshrederer;
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private bool isInvincible = false;
     private void Start()
     {
+        //playerAnimator = GetComponentUnChildren<Animator>();
+        playerAnimator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerRigidbody.freezeRotation = true; // Prevent the player from tipping over
     }
@@ -21,6 +24,8 @@ public class PlayerController : MonoBehaviour
     {
         float xInput = Input.GetAxis("Horizontal");
         float zInput = Input.GetAxis("Vertical");
+        bool isMoving = (xInput !=0 || zInput !=0) ? true : false;
+        playerAnimator.SetBool("isMove", isMoving);
 
         float xSpeed = xInput * speed;
         float zSpeed = zInput * speed;
